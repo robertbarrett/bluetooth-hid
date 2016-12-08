@@ -1,7 +1,6 @@
 #include<SoftwareSerial.h>
 #include "Keyboard.h"
 SoftwareSerial RC(9, 8);
-char RCD;
 
 void payload() {
   Keyboard.press(KEY_LEFT_GUI);
@@ -18,9 +17,8 @@ void setup() {
 }
 
 void loop() {
-  if (RC.available() > 0) {
-    RCD = RC.read();   
-    if(RCD == '1')              // Checks whether value of data is equal to 1
+  if (RC.available() > 0) {  
+    if(RC.read() == '1')
        payload();
   }
 }
