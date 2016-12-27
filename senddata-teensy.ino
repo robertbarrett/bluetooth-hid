@@ -50,7 +50,7 @@ void payload2() {
   returnRelease();
   Keyboard.print("Set wshShell = CreateObject( \"WScript.Shell\" )");
   Keyboard.press(KEY_RETURN);
-  Keyboard.print("");
+  Keyboard.print("WScript.Echo wshShell.ExpandEnvironmentStrings( \"Hello \" + \"%USERNAME%\" + \". An urgent security scan is underway. Please do not click OK\")");
   returnRelease();
   Keyboard.press(KEY_LEFT_CTRL);
   Keyboard.press('c');
