@@ -7,7 +7,7 @@ void loop() {
   if (Serial3.available ()) {  
     btRead = Serial3.read();
     if(btRead == 'h'){
-       Serial3.println("\r\nOptions:\r\n1: Press Capslock\r\n2: Press F11\r\n3: Press Alt+Shift (change language option)\r\n4: Press Alt+Capslock(change language option)\r\n5: Press Alt+Ctrl(change language option)\r\n6: Load PIKOTARO - PPAP Video");
+       Serial3.println("\r\nOptions:\r\n1: Press Capslock\r\n2: Press F11\r\n3: Press Alt+Shift (change language option)\r\n4: Press Alt+Capslock(change language option)\r\n5: Press Alt+Ctrl(change language option)\r\n6: Load PIKOTARO - PPAP Video in Firefox");
     }
     if(btRead == '1'){
        Keyboard.press(KEY_CAPS_LOCK);
@@ -42,7 +42,7 @@ void loop() {
        Keyboard.press(KEY_F2);
        Keyboard.releaseAll();
        delay(200);
-       Keyboard.println("https://www.youtube.com/watch?v=ASO_zypdnsQ");
+       Keyboard.println("https://www.youtube.com/watch?v=Ct6BUPvE2sM");
        Serial3.print("\r\Alt+CapsLock sent sent\r\n");
     }
   }
